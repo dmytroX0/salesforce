@@ -1,0 +1,65 @@
+<aura:component implements="flexipage:availableForAllPageTypes" 
+                controller="MyController"
+                access="global" >
+    
+    <aura:attribute name="accnList"
+                    type="List"/>
+    
+    <aura:handler name="init"
+                  value="{!this}"
+                  action="{!c.doInit}"/>
+    
+    <div class="demo-only slds-grid" style="height: 150px; width: 300px; padding: 2rem;">
+        <div class="slds-is-fixed">
+            <div style="position: absolute; top: 1rem; left: 1rem; border: 1px solid red; background: rgb(244, 246, 249);">
+                
+                <lightning:accordion>
+                    <aura:iteration items="{!v.accnList}" 
+                                    var="acc">
+                                                
+                <lightning:accordionSection name="{!acc.Name}" 
+                                                        label="{!acc.Name}">    
+                        
+                        <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-table--striped slds-max-medium-table--stacked-horizontal"
+                               role="grid">
+                            <thead>
+                                <tr>
+                                    <p>Rating : {!acc.Rating}</p>
+                                </tr>
+                                <tr>
+                                    <p>Phone : {!acc.Phone}</p>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="slds-hint-parent">
+                                   
+                                   <lightning:accordion>
+                                    <aura:iteration items="{!acc.Contacts}" 
+                                                    var="con">
+                                        <lightning:accordionSection name="{!con.Name}" 
+                                                                    label="{!con.Name}">
+                                            
+                                            <aura:set attribute="body">
+                                                
+                                                <p>FirstName : {!con.FirstName}</p>
+                                                <p>LastNamePhone : {!con.LastName}</p>
+                                                
+                                            </aura:set>
+                                        </lightning:accordionSection>
+                                    </aura:iteration>
+                                </lightning:accordion> 
+                                    
+                                </tr>
+                                
+                        </tbody>
+                    </table>
+
+                                
+                            </lightning:accordionSection>
+                            
+                        </aura:iteration>
+                    </lightning:accordion>
+                </div>
+            </div>
+        </div>
+    </aura:component>
